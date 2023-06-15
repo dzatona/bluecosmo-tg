@@ -52,10 +52,10 @@ numprocs=1
 			log.Printf("[x] Updating supervisor config...")
 			cmd = "supervisorctl update"
 			_, _ = exec.Command("bash", "-c", cmd).Output()
-			log.Printf("[x] Starting bluecosmo-tg via supervisor...")
-			cmd = "supervisorctl start bluecosmo-tg"
-			_, _ = exec.Command("bash", "-c", cmd).Output()
-			os.Exit(0)
 		}
+		log.Printf("[x] Starting bluecosmo-tg via supervisor...")
+		cmd = "supervisorctl start bluecosmo-tg"
+		_, _ = exec.Command("bash", "-c", cmd).Output()
+		os.Exit(0)
 	}
 }
