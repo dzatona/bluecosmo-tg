@@ -48,10 +48,10 @@ func checkEnv() {
 			log.Fatalf("[x] An error occurred while loading the environment variables from file %s: %s\n", envFileName, err)
 		}
 		strs := []string{
-			"BLUECOSMO_USERNAME",
-			"BLUECOSMO_PASSWORD",
-			"TG_AUTHORIZED_USERS",
-			"TG_BOT_TOKEN",
+			"\"BLUECOSMO_USERNAME\"",
+			"\"BLUECOSMO_PASSWORD\"",
+			"\"TG_AUTHORIZED_USERS\"",
+			"\"TG_BOT_TOKEN\"",
 		}
 		for _, str := range strs {
 			value := os.Getenv(str)
