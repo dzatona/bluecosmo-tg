@@ -1,3 +1,5 @@
 .idea/*
 /.env
 /bluecosmo-tg
+/.DS_Store
+/bc
