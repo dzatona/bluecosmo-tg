@@ -31,9 +31,9 @@ func checkSupervisor() {
 	if _, err := os.Stat(supConfig); os.IsNotExist(err) {
 		writeSupervisorConfig()
 		updateSupervisorConfig()
+		startBluecosmoTg()
+		os.Exit(0)
 	}
-	startBluecosmoTg()
-	os.Exit(0)
 }
 
 func writeSupervisorConfig() {
