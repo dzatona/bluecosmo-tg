@@ -22,8 +22,8 @@ func checkSupervisor() {
 		if os.IsNotExist(err) {
 			log.Printf("[x] Writing supervisor config...")
 			const configTemplate = `[program:bluecosmo-tg]
-command=bc
-directory=/etc/bluecosmo/
+command=/etc/bluecosmo/bc
+directory=/etc/bluecosmo
 autostart=true
 autorestart=true
 user=root
