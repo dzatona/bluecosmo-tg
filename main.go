@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	v := "1.1.0"
+	v := "1.1.1"
 	log.Printf("[*] BLUECOSMO TELEGRAM BOT v.%s started.", v)
 	checkEnv()
 	checkSupervisor()

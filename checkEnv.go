@@ -29,7 +29,7 @@ func checkAndWriteDefaultEnv(file *os.File) {
 	if err := file.Sync(); err != nil {
 		log.Fatalf("[x] An error occurred while syncing the file %s: %s", envFileName, err)
 	}
-	log.Printf("[x] Config written to file successfully. Please restart the program: ./bc")
+	log.Printf("[x] Config written to file successfully. Please restart the program: ./etc/bluecosmo/bc")
 	os.Exit(1)
 }
 
