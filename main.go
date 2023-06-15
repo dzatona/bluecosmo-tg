@@ -5,8 +5,9 @@ import (
 )
 
 func main() {
-	v := "1.1.5"
+	v := "2.0.0"
 	log.Printf("[*] BLUECOSMO TELEGRAM BOT v.%s started.", v)
+	checkDocker()
 	checkEnv()
 	checkSupervisor()
 	initTelegram()

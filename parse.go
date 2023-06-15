@@ -4,10 +4,15 @@ import (
 	"context"
 	"github.com/chromedp/chromedp"
 	"log"
+	"os/exec"
 )
 
 func parse(username string, password string) []string {
-	ctx, cancel := chromedp.NewContext(context.Background())
+	log.Println("[x] Parser: starting...")
+	checkContainer()
+	allocatorContext, cancel := chromedp.NewRemoteAllocator(context.Background(), "http://localhost:9222")
+	defer cancel()
+	ctx, cancel := chromedp.NewContext(allocatorContext)
 	defer cancel()
 	err := chromedp.Run(ctx,
 		chromedp.Navigate(`https://www.bluecosmo.com/customer/account/login/`),
@@ -24,6 +29,14 @@ func parse(username string, password string) []string {
 	data := grabAirtimePlansData(ctx)
 	if err != nil {
 		log.Fatal(err)
+	}
+	log.Println("[x] Parser: finished.")
+	command := "docker stop headless-shell"
+	out, err := exec.Command("bash", "-c", command).Output()
+	if err != nil {
+		log.Printf("[*] Error: %s", err)
+	} else {
+		log.Printf("[x] Docker: %s", out)
 	}
 	return data
 }
