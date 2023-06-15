@@ -19,7 +19,7 @@ func parse(username string, password string) []string {
 	if err != nil {
 		log.Fatal(err)
 	} else {
-		log.Println("Logged in.")
+		log.Println("[x] Parser: logged in to BlueCosmo.")
 	}
 	data := grabAirtimePlansData(ctx)
 	if err != nil {
@@ -29,7 +29,7 @@ func parse(username string, password string) []string {
 }
 
 func grabAirtimePlansData(ctx context.Context) []string {
-	log.Println("Starting parsing...")
+	log.Println("[x] Parser: collecting data...")
 	const serviceNumberXPath = `//table[@id='data-airtimeplans']//tbody//tr//td[1]`
 	const planNameXPath = `//table[@id='data-airtimeplans']//tbody//tr//td[2]`
 	const minutesUsedXPath = `//table[@id='data-airtimeplans']//tbody//tr//td[3]//li`

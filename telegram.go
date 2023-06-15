@@ -23,6 +23,8 @@ func initTelegram() {
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("TG_BOT_TOKEN"))
 	if err != nil {
 		log.Panic(err)
+	} else {
+		log.Printf("[x] Telegram: authorized on account [%s], awaiting for updates...", bot.Self.UserName)
 	}
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
@@ -52,7 +54,7 @@ func processUpdates(bot *tgbotapi.BotAPI, update *tgbotapi.Update) {
 			_, _ = bot.Send(editMsg)
 			data := parse(os.Getenv("BLUECOSMO_USERNAME"), os.Getenv("BLUECOSMO_PASSWORD"))
 			if len(data) > 0 {
-				log.Println("Sending data to Telegram...")
+				log.Println("[x] Telegram: sending data...")
 				pattern := `\d+`
 				regex := regexp.MustCompile(pattern)
 				totalMinutes, _ := strconv.Atoi(regex.FindString(data[1]))

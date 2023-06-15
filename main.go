@@ -1,14 +1,13 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
 	"log"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	v := "1.1.0"
+	log.Printf("[*] BLUECOSMO TELEGRAM BOT v.%s started.", v)
+	checkEnv()
+	checkSupervisor()
 	initTelegram()
 }
