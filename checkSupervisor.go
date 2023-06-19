@@ -35,6 +35,7 @@ func checkSupervisor() {
 		os.Exit(0)
 	} else {
 		log.Println("[x] Supervisor config exists, run: supervisorctl start bluecosmo-tg")
+		os.Exit(0)
 	}
 }
 
