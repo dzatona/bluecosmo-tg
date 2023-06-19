@@ -60,13 +60,14 @@ func processUpdates(bot *tgbotapi.BotAPI, update *tgbotapi.Update) {
 				totalMinutes, _ := strconv.Atoi(regex.FindString(data[1]))
 				minutesUsed, _ := strconv.Atoi(regex.FindString(data[2]))
 				leftMinutes := strconv.Itoa(totalMinutes - minutesUsed)
-				newmsg := fmt.Sprintf(`<b>Service number</b>: %s
+				newmsg := fmt.Sprintf(`<b>Account number</b>: %s
+<b>Service number</b>: %s
 <b>Plan name</b>: %s
 <b>Minutes used:</b> %s
 <b>Status:</b> %s
 
 <i>Based on your plan name, it looks like you have <b>%s</b> minute(s). You spent <b>%s</b> minute(s), so you should have <b>%s</b> minute(s) left.</i>`,
-					data[0], data[1], data[2], data[3], strconv.Itoa(totalMinutes), strconv.Itoa(minutesUsed), leftMinutes)
+					data[0], data[1], data[2], data[3], data[4], strconv.Itoa(totalMinutes), strconv.Itoa(minutesUsed), leftMinutes)
 				editMsg := tgbotapi.NewEditMessageText(update.Message.Chat.ID, sentMsg.MessageID, newmsg)
 				editMsg.ParseMode = tgbotapi.ModeHTML
 				_, _ = bot.Send(editMsg)

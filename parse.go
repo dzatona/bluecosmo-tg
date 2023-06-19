@@ -43,15 +43,17 @@ func parse(username string, password string) []string {
 
 func grabAirtimePlansData(ctx context.Context) []string {
 	log.Println("[x] Parser: collecting data...")
+	const accountNumberXPath = `//p[@class='hc-1']`
 	const serviceNumberXPath = `//table[@id='data-airtimeplans']//tbody//tr//td[1]`
 	const planNameXPath = `//table[@id='data-airtimeplans']//tbody//tr//td[2]`
 	const minutesUsedXPath = `//table[@id='data-airtimeplans']//tbody//tr//td[3]//li`
 	const statusXPath = `//table[@id='data-airtimeplans']//tbody//tr//td[5]`
-	var serviceNumber, planName, minutesUsed, status string
+	var accountNumber, serviceNumber, planName, minutesUsed, status string
 	_ = chromedp.Run(ctx,
 		chromedp.WaitVisible(`.hc-1`, chromedp.ByQuery),
 		chromedp.Navigate(`https://www.bluecosmo.com/services/airtimeplans/`),
 		chromedp.WaitVisible(`//table[@id='data-airtimeplans']`, chromedp.BySearch),
+		chromedp.Text(accountNumberXPath, &accountNumber, chromedp.BySearch),
 		chromedp.Text(serviceNumberXPath, &serviceNumber, chromedp.BySearch),
 		chromedp.Text(planNameXPath, &planName, chromedp.BySearch),
 		chromedp.Text(minutesUsedXPath, &minutesUsed, chromedp.BySearch),
@@ -61,6 +63,7 @@ func grabAirtimePlansData(ctx context.Context) []string {
 		minutesUsed = "0"
 	}
 	data := []string{
+		accountNumber,
 		serviceNumber,
 		planName,
 		minutesUsed,
