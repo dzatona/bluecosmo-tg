@@ -57,6 +57,9 @@ func grabAirtimePlansData(ctx context.Context) []string {
 		chromedp.Text(minutesUsedXPath, &minutesUsed, chromedp.BySearch),
 		chromedp.Text(statusXPath, &status, chromedp.BySearch),
 	)
+	if minutesUsed == "" {
+		minutesUsed = "0"
+	}
 	data := []string{
 		serviceNumber,
 		planName,
